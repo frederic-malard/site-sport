@@ -1,28 +1,16 @@
 /*
     COLORS :
-        MAIN (name & sentence & selected menu & hover menu) :
-            MAGENTA-FLASHY-LIGHT : #f28
-            MAGENTA-RED-FLASHY : #e06
-            RED-MAGENTA-MIDDLE : #e04
-            RED-ORANGE-SOBER : #b40
-        NON SELECTED MENU :
-            DARK-WARM-LAVANDER : #95b
-            DARK-SOBER-LAVANDER : #86b
-        DISABLED MENU :
-            DARK RED GREY : #774055
+        POLO-RASPBERRIES : #b16
+        MAGENTA-FLASHY-LIGHT : #f28
+        MAGENTA-RED-FLASHY : #e06
+        RED-MAGENTA-MIDDLE : #e04
+        RED-ORANGE-SOBER : #b40
+        PISTACHIOS : #8b6
+        NIGHT-BLUE : #22d
+        DARK-WARM-LAVANDER : #95b
+        DARK-SOBER-LAVANDER : #86b
+        DARK RED GREY : #774055
 */
-
-@media screen and (min-width: 768px)
-{
-    ul.navbar-nav
-    {
-        width: 85%;
-        margin: auto;
-        display: flex;
-        flex-flow: row nowrap;
-        justify-content: space-between;
-    }
-}
 
 @media screen and (max-width: 767px)
 {
@@ -37,7 +25,34 @@
         margin-bottom: 0.8em;
     }
 }
+@media screen and (min-width: 768px)
+{
+    ul.navbar-nav
+    {
+        width: 85%;
+        margin: auto;
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-between;
+    }
+    .perso-big-button
+    {
+        width: 300px;
+    }
+    .perso-card
+    {
+        width: 768px;
+    }
+}
 
+body
+{
+    color: #222;
+    background-color: white;
+    opacity: 1;
+    background-image: repeating-linear-gradient(90deg, #eee, transparent 50%, #eee 100%);
+    background-size: 5px 1px;
+}
 .perso-brand, .perso-menu
 {
     font-weight: 100;
@@ -128,4 +143,109 @@
 {
     width: 90%;
     max-width : 576px;
+}
+.perso-container
+{
+    width: 992px;
+    max-width: 95%;
+    margin: auto;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+.perso-big-button, .perso-card-serie
+{
+    background-color: #000000;
+    opacity: 1;
+    background-image: linear-gradient(90deg, #333, transparent 50%, #333 100%);
+    color: #9ce;
+}
+.perso-big-button
+{
+    display: block;
+    margin: auto;
+    width: 288px;
+    height: 5em;
+    border: 0px;
+    border-radius: 5px;
+}
+h1
+{
+    text-transform: uppercase;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    text-align: center;
+    color: #222;
+}
+.perso-card
+{
+    border-radius: 5px;
+    display: block;
+    margin: auto;
+    width: 90%;
+    max-width: 661px;
+    padding: 30px;
+    padding-bottom: 15px;
+    text-align: center;
+}
+/* .perso-card-serie
+{
+    color: #ddd;
+} */
+.perso-card-title
+{
+    font-size: 1.3em;
+    text-transform: uppercase;
+}
+.perso-ok
+{
+    color: #8e7;
+}
+.perso-number
+{
+    font-size: 2.5em;
+}
+.perso-card-time
+{
+    margin-bottom: 3px;
+}
+/* .perso-card-sentence
+{
+
+} */
+.card-buttons
+{
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-around;
+    margin: 1em;
+    margin-top: 2em;
+    font-size: 1.15em;
+}
+.card-button
+{
+    padding: 0.5em;
+    width: 17%;
+    font-weight: bolder;
+    border: none;
+    border-radius: 5px;
+}
+.card-button-done
+{
+    background: #8e7;
+    color: #242;
+}
+.card-button-break
+{
+    background: #ed5;
+    color: #442;
+}
+.card-button-stop
+{
+    background: #e73;
+    color: #431;
+}
+.card-button-remove
+{
+    background: #e44;
+    color: #422;
 }

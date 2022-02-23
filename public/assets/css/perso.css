@@ -1,0 +1,125 @@
+/*
+    COLORS :
+        MAIN (name & sentence & selected menu & hover menu) :
+            MAGENTA-FLASHY-LIGHT : #f28
+            MAGENTA-RED-FLASHY : #e06
+            RED-MAGENTA-MIDDLE : #e04
+            RED-ORANGE-SOBER : #b40
+        NON SELECTED MENU :
+            DARK-WARM-LAVANDER : #95b
+            DARK-SOBER-LAVANDER : #86b
+        DISABLED MENU :
+            DARK RED GREY : #774055
+*/
+
+.nav-perso-pattern
+{
+    height: 350px;
+    color: #b40 !important;
+    font-weight: 100;
+    letter-spacing: 0.25em;
+    font-family: Helvetica, 'Times New Roman', sans-serif;
+    display : flex;
+    flex-flow: column;
+    background-color: #000000;
+    opacity: 1;
+    background-image:  repeating-linear-gradient(45deg, #222 25%, transparent 25%, transparent 75%, #222 75%, #222), repeating-linear-gradient(45deg, #222 25%, #000000 25%, #000000 75%, #222 75%, #222);
+    background-position: 0 0, 8px 8px;
+    background-size: 16px 16px;
+}
+/* .nav-perso-black
+{
+    height: 350px;
+    background : black;
+    padding : 0px;
+}
+.nav-perso-image
+{
+    background: url('/assets/images/header/haltere.png') no-repeat center;
+    height : 100%;
+    width : 100%;
+}
+.nav-perso-filter
+{
+    height : 100%;
+    width : 100%;
+    background : rgba(0, 0, 0, 0.5);
+    color: #d04 !important;
+    font-weight: 100;
+    letter-spacing: 0.2em;
+    font-family: Helvetica, 'Times New Roman', sans-serif;
+    display : flex;
+    flex-flow: column;
+} */
+.perso-menu
+{
+    flex : 0 1 auto;
+    width: 100%;
+    background-image: linear-gradient(black, #222 100%);
+}
+.perso-menu .nav-link
+{
+    color: #86b !important;
+}
+.perso-menu .active, .perso-menu .nav-link:hover, .perso-menu .nav-link:active
+{
+    color: #b40 !important;
+}
+.perso-menu .disabled
+{
+    color: #774055 !important;
+}
+.custom-toggler .navbar-toggler-icon
+{
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgb(221,0,68)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+}
+ul.navbar-nav
+{
+    width: 85%;
+    margin: auto;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+}
+.perso-brand
+{
+    height : 100%;
+    width : 100%;
+    display : flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    margin-top : -10px;
+}
+.perso-brand div:first-child
+{
+    margin-bottom: -0.2em;
+    margin-top: -0.2em;
+}
+.perso-name
+{
+    width: 100%;
+    max-width : 4.73em;
+    font-size : 7.35em;
+    text-transform: uppercase;
+    transform: scale(1, 1.2);
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    font-weight: 400;
+}
+.perso-name-letter:first-child
+{
+    padding-top: 0.2em;
+}
+.perso-sentence
+{
+    width: 97%;
+    max-width : 34em;
+    word-spacing: 2.1em;
+    text-transform: capitalize;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+}

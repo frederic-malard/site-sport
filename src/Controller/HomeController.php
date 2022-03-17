@@ -13,6 +13,15 @@ class HomeController extends AbstractController
      */
     public function index(): Response
     {
+        // TODO : if not connected, redirect to "about"
         return $this->render('home/index.html.twig');
+    }
+
+    /**
+     * @Route("/about", name="about")
+     */
+    public function about()
+    {
+        return $this->render('home/about.html.twig');
     }
 }

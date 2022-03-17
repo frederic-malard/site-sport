@@ -8,17 +8,29 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-                <a href="#" class="nav-link active" aria-current="page">
+                {% if app.request.get('_route') == "home" %}
+                    <a href="{{ path("home") }}" class="nav-link active" aria-current="page">
+                {% else %}
+                    <a href="{{ path("home") }}" class="nav-link" aria-current="page">
+                {% endif %}
                     Todo
                 </a>
             </li>
             <li class="nav-item">
-                <a href="#" class="nav-link">
+                {% if app.request.get('_route') == "profile" %}
+                    <a href="{{ path('profile') }}" class="nav-link active">
+                {% else %}
+                    <a href="{{ path('profile') }}" class="nav-link">
+                {% endif %}
                     Profile
                 </a>
             </li>
             <li class="nav-item">
-                <a href="#" class="nav-link">
+                {% if app.request.get('_route') == "about" %}
+                    <a href="{{ path("about") }}" class="nav-link active">
+                {% else %}
+                    <a href="{{ path("about") }}" class="nav-link">
+                {% endif %}
                     About
                 </a>
             </li>

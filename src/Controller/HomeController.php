@@ -13,8 +13,10 @@ class HomeController extends AbstractController
      */
     public function index(): Response
     {
-        // TODO : if not connected, redirect to "about"
-        return $this->render('home/index.html.twig');
+        if ($this->isGranted('ROLE_USER'))
+            return $this->render('home/index.html.twig');
+        else
+            return $this->redirectToRoute('about');
     }
 
     /**

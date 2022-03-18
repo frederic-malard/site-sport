@@ -49,6 +49,12 @@ class Exercice
      */
     private $isRun;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="exercices")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
+
     public function __construct()
     {
         $this->serieOrRuns = new ArrayCollection();
@@ -145,6 +151,18 @@ class Exercice
     public function setIsRun(bool $isRun): self
     {
         $this->isRun = $isRun;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }

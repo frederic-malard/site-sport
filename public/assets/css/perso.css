@@ -189,7 +189,7 @@ body
 }
 .perso-big-button, .perso-card-serie
 {
-    background-color: #fda;
+    background-color: #feb;
     opacity: 1;
 }
 .perso-big-button
@@ -202,7 +202,7 @@ body
     height: 5em;
     border: 0px;
     border-radius: 5px;
-    background-image: linear-gradient(90deg, rgba(255,100,0,.1), transparent 25%, transparent 75%, rgba(255,100,0,.1) 100%);
+    background-image: linear-gradient(90deg, rgba(255,100,0,.05), transparent 25%, transparent 75%, rgba(255,100,0,.05) 100%);
     color: #222;
 }
 h1
@@ -243,8 +243,8 @@ blockquote
 }
 .perso-card-distance
 {
-    background: #def;
-    background-image: linear-gradient(90deg, rgba(0,100,255,.1), transparent 25%, transparent 75%, rgba(0,100,255,.1) 100%);
+    background: #e3f3ff;
+    background-image: linear-gradient(90deg, rgba(0,100,255,.09), transparent 25%, transparent 75%, rgba(0,100,255,.09) 100%);
     color: #346;
 }
 .perso-card-title

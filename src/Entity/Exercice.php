@@ -166,4 +166,15 @@ class Exercice
 
         return $this;
     }
+
+    public function getLastTime()
+    {
+        $sor = $this->serieOrRuns->getValues()[0];
+        foreach ($this->serieOrRuns as $serieOrRun) {
+            if ($sor->getCreatedAt() < $serieOrRun) {
+                $sor = $serieOrRun;
+            }
+        }
+        return $sor;
+    }
 }

@@ -9,10 +9,18 @@ use App\Entity\Serie;
 use App\Entity\Exercice;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 // use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class AppFixtures extends Fixture
 {
+    private $hasher;
+
+    public function __construct(UserPasswordHasherInterface $hasher)
+    {
+        $this->hasher = $hasher;
+    }
+
     public function load(ObjectManager $manager/*, UserPasswordHasherInterface $userPasswordHasher*/): void
     {
         $faker = Factory::create();
@@ -23,21 +31,16 @@ class AppFixtures extends Fixture
         for ($i=0; $i < 10; $i++) { 
             $user = new User();
 
-            $password = "";
-            for ($j=0; $j < 10; $j++) { 
-                if ($faker->randomDigit < 3)
-                    $password .= strval($faker->randomDigit);
-                else
-                    $password .= strval($faker->randomLetter);
-            }
-            // $hashedPassword = $userPasswordHasher->hashPassword(
-            //     $user,
-            //     $password
-            // );
+            $password = $faker->password;
+            $hashedPassword = $this->hasher->hashPassword(
+                $user,
+                $password
+            );
 
             $user
                 ->setEmail($faker->email)
-                ->setPassword($password)
+                ->setPassword($hashedPassword)
+                ->setFixturesPassword($password)
                 ->setCreatedAt(new \DateTimeImmutable())
                 ->setIsVerified($faker->boolean)
             ;

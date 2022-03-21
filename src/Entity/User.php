@@ -54,6 +54,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $exercices;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $fixturesPassword;
+
     public function __construct()
     {
         $this->createdAt = New \DateTimeImmutable();
@@ -199,6 +204,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $exercice->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getFixturesPassword(): ?string
+    {
+        return $this->fixturesPassword;
+    }
+
+    public function setFixturesPassword(?string $fixturesPassword): self
+    {
+        $this->fixturesPassword = $fixturesPassword;
 
         return $this;
     }

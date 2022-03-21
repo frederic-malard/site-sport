@@ -9,7 +9,95 @@
     <h1>
         to do today
     </h1>
-    <div class="perso-card perso-card-serie">
+    {% for exercice in exercices %}
+        {% set last = exercice.getLastTime() %}
+        {% set hCat = last.getHoursCategory() %}
+        {% if exercice.isRun %}
+            <div class="perso-card perso-card-distance">
+        {% else %}
+            <div class="perso-card perso-card-serie">
+        {% endif %}
+            <p class="perso-card-title">
+                {{ exercice.name }}
+            </p>
+            {% if exercice.isRun %}
+                <div class="row card-distance-center">
+                    <div class="col-12 col-md-6 card-distance-infos">
+                        <p class="perso-{{ hCat }} perso-goal">
+                            score to aim : <span class="perso-number">{{ last.getNext() }}</span>
+                        </p>
+            {% else %}
+                <p class="perso-{{ hCat }} perso-number">
+                    {{ last.getNext() }}
+                </p>
+            {% endif %}
+            <p class="perso-{{ hCat }} perso-card-time">
+                last time : {{ exercice }} hours ago
+            </p>
+            <p class="perso-{{ hCat }} perso-card-sentence">
+                {% if hCat == 'rest' %}
+                    Too early... Take some time to rest !
+                {% elseif hCat == 'ok' %}
+                    Right now is the perfect time to do it !
+                {% elseif hCat == 'limit' %}
+                    It's a bit late, you sould do it now !
+                {% else %}
+                    It've been a while ! You should do it now, or you'll loose performance
+                {% endif %}
+            </p>
+            {% if exercice.isRun %}
+                    </div>
+                    <div class="col-12 col-md-6 card-distance-test">
+                        <p class="card-test-title">
+                            test / compute
+                        </p>
+                        <form action="">
+                            <div class="row card-test-seperate">
+                                <div class="col-6 card-table-distance">
+                                    distance (km) <br>
+                                    <input type="text">
+                                </div>
+                                <div class="col-6 card-table-ascending">
+                                    ascending (m) <br>
+                                    <input type="text">
+                                </div>
+                            </div>
+                        </form>
+                        <p class="card-test-result">
+                            score resulting : (calculer)
+                        </p>
+                    </div>
+                </div>
+            {% endif %}
+            <div class="card-buttons">
+                {% if hCat == 'rest' or exercice.break or exercice.stop %}
+                    <button class="card-button card-button-disabled">
+                        done
+                    </button>
+                {% else %}
+                    <button class="card-button card-button-done">
+                        done
+                    </button>
+                {% endif %}
+                {% if exercice.break or exercice.stop %}
+                    <button class="card-button card-button-done">
+                        start again
+                    </button>
+                {% else %}
+                    <button class="card-button card-button-break">
+                        break
+                    </button>
+                    <button class="card-button card-button-stop">
+                        stop
+                    </button>
+                {% endif %}
+                <button class="card-button card-button-remove">
+                    remove
+                </button>
+            </div>
+        </div>
+    {% endfor %}
+    {# <div class="perso-card perso-card-serie">
         <p class="perso-card-title">
             push-ups
         </p>
@@ -145,5 +233,5 @@ or you'll lose performance
                 remove
             </button>
         </div>
-    </div>
+    </div> #}
 {% endblock %}

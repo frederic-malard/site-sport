@@ -50,4 +50,36 @@ class SerieOrRun
 
         return $this;
     }
+
+    public function getPassedHours()
+    {
+        $now = new \DateTimeImmutable();
+        $passedTime = $this->createdAt->diff($now);
+        return $passedTime->h;
+    }
+
+    public function getHoursCategory()
+    {
+        $h = $this->getPassedHours();
+        if ($h < 16)
+            return "rest";
+        if ($h < 28)
+            return "ok";
+        if ($h < 72)
+            return "limit";
+        return "late";
+    }
+
+    public function getNext()
+    {
+        $passedDays = round($this->getPassedHours() / 24);
+        $slownessCoefficient = 1 / (1 + (abs(2 - $passedDays) / 3));
+        $previous = null;
+        if ($this->exercice->getIsRun())
+            $previous = $this->getScore();
+        else
+            $previous = $this->getRepetitions();
+        
+        return ($previous * (1 + 0.02 * $slownessCoefficient)) + 0.2 * $slownessCoefficient;
+    }
 }

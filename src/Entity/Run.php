@@ -56,4 +56,12 @@ class Run extends SerieOrRun
 
         return $this;
     }
+
+    /**
+     * TODO : change the whole entity to adapt coefficient to run type
+     */
+    public function getScore()
+    {
+        return $this->km + 0.15 * $this->positiveElevation;
+    }
 }

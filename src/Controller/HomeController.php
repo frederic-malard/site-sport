@@ -17,6 +17,7 @@ class HomeController extends AbstractController
         if ($this->isGranted('ROLE_USER'))
         {
             $exercices = $this->getUser()->getExercices()->getValues();
+            
             return $this->render(
                 'home/index.html.twig',
                 [

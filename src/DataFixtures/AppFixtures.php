@@ -7,6 +7,7 @@ use App\Entity\Run;
 use App\Entity\User;
 use App\Entity\Serie;
 use App\Entity\Exercice;
+use DateTimeImmutable;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -28,7 +29,7 @@ class AppFixtures extends Fixture
         // USERS
         $users = [];
 
-        for ($i=0; $i < 10; $i++) { 
+        for ($i=0; $i < 5; $i++) { 
             $user = new User();
 
             $password = $faker->password;
@@ -128,10 +129,17 @@ class AppFixtures extends Fixture
 
             $numExercice = $faker->numberBetween(0, count($exercicesSeries) - 1);
 
+            $dateCreatedAt = $faker->dateTimeBetween(
+                $startDate = '-85 hours',
+                $endDate = 'now'
+            );
+
+            $dateCreatedAt = \DateTimeImmutable::createFromMutable($dateCreatedAt);
+
             $serie
                 ->setRepetitions($repetitions)
                 ->setExercice($exercicesSeries[$numExercice])
-                ->setCreatedAt(new \DateTimeImmutable())
+                ->setCreatedAt($dateCreatedAt)
             ;
 
             $series[] = $serie;
@@ -157,11 +165,18 @@ class AppFixtures extends Fixture
 
             $numExercice = $faker->numberBetween(0, count($exercicesRuns) - 1);
 
+            $dateCreatedAt = $faker->dateTimeBetween(
+                $startDate = '-85 hours',
+                $endDate = 'now'
+            );
+
+            $dateCreatedAt = \DateTimeImmutable::createFromMutable($dateCreatedAt);
+
             $run
                 ->setKm($km)
                 ->setPositiveElevation($positiveElevation)
                 ->setExercice($exercicesRuns[$numExercice])
-                ->setCreatedAt(new \DateTimeImmutable())
+                ->setCreatedAt($dateCreatedAt)
             ;
 
             $runs[] = $run;

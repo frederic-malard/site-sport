@@ -4,13 +4,26 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\SerieOrRunRepository;
+use Doctrine\ORM\Mapping\InheritanceType;
+use Doctrine\ORM\Mapping\DiscriminatorMap;
 use Doctrine\ORM\Mapping\MappedSuperclass;
+use Doctrine\ORM\Mapping\DiscriminatorColumn;
 
 /**
- * @MappedSuperclass
+ * @ORM\Entity(repositoryClass=SerieOrRunRepository::class)
+ * @InheritanceType("SINGLE_TABLE")
+ * @DiscriminatorColumn(name="discr", type="string")
+ * @DiscriminatorMap({"serieOrRun" = "SerieOrRun", "run" = "Run", "serie" = "Serie"})
  */
 class SerieOrRun
 {
+    /**
+     * @ORM\Id
+     * @ORM\GeneratedValue
+     * @ORM\Column(type="integer")
+     */
+    private $id;
+
     /**
      * @ORM\ManyToOne(targetEntity=Exercice::class, inversedBy="serieOrRuns")
      * @ORM\JoinColumn(nullable=false)
@@ -55,7 +68,7 @@ class SerieOrRun
     {
         $now = new \DateTimeImmutable();
         $passedTime = $this->createdAt->diff($now);
-        return $passedTime->h;
+        return $passedTime->y * 365 * 24 + $passedTime->m * 30 * 24 + $passedTime->d * 24 + $passedTime->h;
     }
 
     public function getHoursCategory()

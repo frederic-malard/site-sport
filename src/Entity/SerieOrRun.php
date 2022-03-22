@@ -95,4 +95,11 @@ class SerieOrRun
         
         return ($previous * (1 + 0.02 * $slownessCoefficient)) + 0.2 * $slownessCoefficient;
     }
+
+    public function __toString()
+    {
+        $name = $this->exercice->getName();
+        $dateString = $this->createdAt->format('d/m/Y H:i:s');
+        return $name . ' ' . $dateString;
+    }
 }

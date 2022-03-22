@@ -58,6 +58,7 @@ class Exercice
     public function __construct()
     {
         $this->serieOrRuns = new ArrayCollection();
+        $this->createdAt = new \DateTimeImmutable();
     }
 
     public function getId(): ?int
@@ -176,5 +177,10 @@ class Exercice
             }
         }
         return $sor;
+    }
+
+    public function __toString()
+    {
+        return $this->name;
     }
 }

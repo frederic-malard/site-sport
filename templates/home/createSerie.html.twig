@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Creating a run{% endblock %}
+
+{% block body %}
+    <div class="perso-container">
+        <h1>
+            create a new run
+        </h1>
+        {{ form_start(form) }}
+            {{ form_row(
+                form.repetitions,
+                {
+                    'label' : 'repetitions',
+                    'help' : "the number of repetitions during the serie."
+                }
+            ) }}
+            <button class="button-form" type="submit">
+                sumbit
+            </button>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

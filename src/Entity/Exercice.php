@@ -2,13 +2,18 @@
 
 namespace App\Entity;
 
-use App\Repository\ExerciceRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\ExerciceRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints\LessThanOrEqual;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints\GreaterThanOrEqual;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=ExerciceRepository::class)
+ * @UniqueEntity(fields={"name", "user"}, message="You already created another exercice with the same name.")
  */
 class Exercice
 {
@@ -26,6 +31,7 @@ class Exercice
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Assert\GreaterThanOrEqual(0)
      */
     private $break;
 
@@ -41,6 +47,7 @@ class Exercice
 
     /**
      * @ORM\Column(type="datetime_immutable")
+     * @Assert\LessThanOrEqual("+2 minutes")
      */
     private $createdAt;
 
@@ -172,7 +179,7 @@ class Exercice
     {
         $sor = $this->serieOrRuns->getValues()[0];
         foreach ($this->serieOrRuns as $serieOrRun) {
-            if ($sor->getCreatedAt() < $serieOrRun) {
+            if ($sor->getCreatedAt() < $serieOrRun->getCreatedAt()) {
                 $sor = $serieOrRun;
             }
         }

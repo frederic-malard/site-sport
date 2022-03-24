@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Creating a run{% endblock %}
+
+{% block body %}
+    <div class="perso-container">
+        <h1>
+            create a new run
+        </h1>
+        {{ form_start(form) }}
+            {{ form_row(
+                form.km,
+                {
+                    'label' : 'distance (kilometers)'
+                }
+            ) }}
+            {{ form_row(
+                form.positiveElevation,
+                {
+                    'label' : 'positive elevation (meters)',
+                    'help' : "just the positive one ! You sometimes can find it on the internet. If you can't and it's flat, just put '0'. If it's not, adding it on this website will not be relevant."
+                }
+            ) }}
+            <button class="button-form" type="submit">
+                sumbit
+            </button>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

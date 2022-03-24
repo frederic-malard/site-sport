@@ -3,9 +3,9 @@
 {% block title %}Accueil{% endblock %}
 
 {% block body %}
-    <button class="perso-big-button">
+    <a class="perso-big-button" href="{{ path('create_exercice') }}">
         configure new exercice
-    </button>
+    </a>
     <h1>
         to do today
     </h1>
@@ -13,9 +13,9 @@
         {% set last = exercice.getLastTime() %}
         {% set hCat = last.getHoursCategory() %}
         {% if exercice.isRun %}
-            <div class="perso-card perso-card-distance">
+            <div id="exercice-{{ exercice.name }}" class="perso-card perso-card-distance">
         {% else %}
-            <div class="perso-card perso-card-serie">
+            <div id="exercice-{{ exercice.name }}" class="perso-card perso-card-serie">
         {% endif %}
             <p class="perso-card-title">
                 {{ exercice.name }}
@@ -55,16 +55,17 @@
                             <div class="row card-test-seperate">
                                 <div class="col-6 card-table-distance">
                                     distance (km) <br>
-                                    <input type="text">
+                                    <input type="text" onchange="kmOrMChange('{{ exercice.name }}')" class="test-distance">
                                 </div>
                                 <div class="col-6 card-table-ascending">
                                     ascending (m) <br>
-                                    <input type="text">
+                                    <input type="text" onchange="kmOrMChange('{{ exercice.name }}')" class="test-positive-elevation">
                                 </div>
                             </div>
                         </form>
-                        <p class="card-test-result">
-                            score resulting : (calculer)
+                        <p>
+                            score resulting : 
+                            <span class="card-test-result">0</span>
                         </p>
                     </div>
                 </div>
@@ -75,12 +76,12 @@
                         done
                     </button>
                 {% else %}
-                    <button class="card-button card-button-done">
+                    <a class="card-button card-button-done" id="done-{{ exercice.name }}" href="{{ path('validate_serie', {'id' : exercice.id}) }}" onclick="clickOnDone(event, '{{ exercice.name }}')">
                         done
-                    </button>
+                    </a>
                 {% endif %}
                 {% if exercice.break or exercice.stop %}
-                    <button class="card-button card-button-done">
+                    <button class="card-button card-button-restart">
                         restart
                     </button>
                 {% else %}
@@ -97,4 +98,54 @@
             </div>
         </div>
     {% endfor %}
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        // changing result showed
+        function kmOrMChange(exerciceName)
+        {
+            km = document.querySelector("#exercice-" + exerciceName + " .test-distance").value;
+            m = document.querySelector("#exercice-" + exerciceName + " .test-positive-elevation").value;
+            scoreElt = document.querySelector("#exercice-" + exerciceName + " .card-test-result");
+            goalElt = document.querySelector("#exercice-" + exerciceName + " .perso-number");
+
+            if (km == '' || m == '')
+            {
+                scoreElt.innerHtml = 0;
+            }
+            else
+            {
+                newScore = parseInt(km) + 0.15 * parseInt(m);
+                scoreElt.textContent = newScore.toString();
+            }
+        }
+
+        // disabling "done" link if score too low
+        function clickOnDone(event, exerciceName)
+        {
+            km = document.querySelector("#exercice-" + exerciceName + " .test-distance").value;
+            m = document.querySelector("#exercice-" + exerciceName + " .test-positive-elevation").value;
+
+            scoreElt = document.querySelector("#exercice-" + exerciceName + " .card-test-result");
+            goalElt = document.querySelector("#exercice-" + exerciceName + " .perso-number");
+            buttonDoneElt = document.querySelector("#exercice-" + exerciceName + " .card-button-done")
+
+            score = parseInt(scoreElt.textContent)
+            goal = parseInt(goalElt.textContent)
+
+            console.log(score);
+            console.log(goal);
+            
+            if (score < goal)
+            {
+                event.preventDefault();
+            }
+            else
+            {
+                event.preventDefault();
+                window.location.href = buttonDoneElt.href + "/" + km + "/" + m;
+            }
+        }
+    </script>
 {% endblock %}

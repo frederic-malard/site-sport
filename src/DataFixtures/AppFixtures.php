@@ -22,7 +22,7 @@ class AppFixtures extends Fixture
         $this->hasher = $hasher;
     }
 
-    public function load(ObjectManager $manager/*, UserPasswordHasherInterface $userPasswordHasher*/): void
+    public function load(ObjectManager $manager): void
     {
         $faker = Factory::create();
 

@@ -2,13 +2,19 @@
 
 namespace App\Entity;
 
-use App\Repository\UserRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use App\Repository\UserRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints\Email;
+use Symfony\Component\Validator\Constraints\Regex;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints\LessThanOrEqual;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints\NotCompromisedPassword;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
@@ -25,6 +31,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
+     * @Assert\Email(message="The email '{{ value }}' is not a valid email.")
      */
     private $email;
 
@@ -36,11 +43,32 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
+     * @Assert\NotCompromisedPassword
+     * @Assert\Length(
+     *  min = 7,
+     *  minMessage = "Your password must be at least {{ limit }} characters."
+     * )
+     * @Assert\Regex(
+     *  pattern="/\d/",
+     *  match=true,
+     *  message="Your password must contain at least one number."
+     * )
+     * @Assert\Regex(
+     *  pattern="/[a-z]/",
+     *  match=true,
+     *  message="Your password must contain at least one lowercase letter."
+     * )
+     * @Assert\Regex(
+     *  pattern="/[A-Z]/",
+     *  match=true,
+     *  message="Your password must contain at least one uppercase letter."
+     * )
      */
     private $password;
 
     /**
      * @ORM\Column(type="datetime_immutable")
+     * @Assert\LessThanOrEqual("+2 minutes")
      */
     private $createdAt;
 

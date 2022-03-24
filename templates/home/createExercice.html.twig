@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Creating an exercice{% endblock %}
+
+{% block body %}
+    <div class="perso-container">
+        <h1>
+            create a new exercice
+        </h1>
+        {{ form_start(form) }}
+            {{ form_row(
+                form.name,
+                {
+                    'label' : 'name',
+                    'attr' : {
+                        'placeholder' : "choose any name for your exercice (ex : 'push-ups')"
+                    }
+                }
+            ) }}
+            {{ form_row(
+                form.isRun,
+                {
+                    'label' : 'is it a run ?',
+                    'help' : "tick the box if your exercice is 'run type' (implying a distance) (bike, running, hiking...)"
+                }
+            ) }}
+            <button class="button-form" type="submit">
+                sumbit
+            </button>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

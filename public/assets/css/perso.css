@@ -199,11 +199,30 @@ body
     margin-top: 3em;
     margin-bottom: 3em;
     width: 288px;
-    height: 5em;
     border: 0px;
     border-radius: 5px;
     background-image: linear-gradient(90deg, rgba(255,100,0,.05), transparent 25%, transparent 75%, rgba(255,100,0,.05) 100%);
     color: #222;
+    text-decoration: none;
+    text-align: center;
+    padding-top: 2em;
+    padding-bottom: 2em;
+}
+.button-form
+{
+    display: block;
+    margin: auto;
+    margin-top: 3em;
+    margin-bottom: 3em;
+    width: 288px;
+    border: 0px;
+    border-radius: 5px;
+    background: #86b;
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    padding-top: 1.5em;
+    padding-bottom: 1.5em;
 }
 h1
 {
@@ -292,35 +311,41 @@ blockquote
     margin-top: 2em;
     font-size: 1.15em;
 }
-.card-button-done
+.card-button-done, .card-button-done:hover, .card-button-done:active
 {
     background: #6c4;
     color: #242;
 }
-.card-button-break
+.card-button-restart, .card-button-restart:hover, .card-button-restart:active
+{
+    background: #6c4;
+    color: #242;
+}
+.card-button-break, .card-button-break:hover, .card-button-break:active
 {
     background: #dc2;
     color: #442;
 }
-.card-button-stop
+.card-button-stop, .card-button-stop:hover, .card-button-stop:active
 {
     background: #f93;
     color: #431;
 }
-.card-button-remove
+.card-button-remove, .card-button-remove:hover, .card-button-remove:active
 {
     background: #e55;
     color: #422;
 }
-.card-button-disabled
+.card-button-disabled, .card-button-disabled:hover, .card-button-disabled:active
 {
     background: #bbb;
     color: #222;
 }
-.card-button
+.card-button, .card-button:hover, .card-button:active
 {
     padding: 0.5em;
     width: 17%;
+    text-decoration: none;
     font-weight: bolder;
     border: none;
     border-radius: 5px;
@@ -349,4 +374,7 @@ blockquote
 .card-test-result
 {
     margin-top: 9px;
+    margin-left: 0.3em;
+    font-weight: bold;
+    font-size: 1.5em;
 }

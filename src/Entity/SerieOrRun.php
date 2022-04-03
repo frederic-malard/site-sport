@@ -91,14 +91,19 @@ class SerieOrRun
     public function getNext()
     {
         $passedDays = round($this->getPassedHours() / 24);
-        $slownessCoefficient = 1 / (1 + (abs(2 - $passedDays) / 3));
+        if ($passedDays < 2)
+            $slownessCoefficient = 1 / (1 + (abs(2 - $passedDays) / 150));
+        elseif ($passedDays < 10)
+            $slownessCoefficient = 1 / (1 + (abs(2 - $passedDays) / 400));
+        else
+            $slownessCoefficient = (1 / (1 + (abs(2 - $passedDays) / 150))) + 0.031; // 0.31 : trouvé à tâtons, rattrape le saut du passage entre 10 et 11 jours
         $previous = null;
         if ($this->exercice->getIsRun())
             $previous = $this->getScore();
         else
             $previous = $this->getRepetitions();
         
-        return ($previous * (1 + 0.02 * $slownessCoefficient)) + 0.2 * $slownessCoefficient;
+        return $previous * 1.02 * $slownessCoefficient + 0.13 * $slownessCoefficient;
     }
 
     public function __toString()

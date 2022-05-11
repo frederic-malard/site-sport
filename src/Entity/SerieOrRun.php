@@ -103,7 +103,7 @@ class SerieOrRun
         else
             $previous = $this->getRepetitions();
         
-        return $previous * 1.02 * $slownessCoefficient + 0.13 * $slownessCoefficient;
+        return $previous * 1.02 * $slownessCoefficient + 0.1 * $slownessCoefficient;
     }
 
     public function __toString()
